@@ -22,12 +22,12 @@ export default function Sidebar() {
            <ul>
            <div className="flex items-center px-2 space-x-2 border-white rounded-2xl hover:bg-slate-400 cursor-pointer">
            <LayoutDashboard />
-             <Link href="DashBoard"className="px-4 py-2  "> Dashboard</Link>
+             <Link href="/DashBoard"className="px-4 py-2  "> Dashboard</Link>
            </div>
 
            <div className="flex items-center px-2 space-x-2 border-white rounded-xl hover:bg-slate-400 cursor-pointer">
            <BadgeDollarSign />
-             <Link href="Sales" className="px-4 py-2 ">Sales</Link>
+             <Link href="/Sales" className="px-4 py-2 ">Sales</Link>
              
            </div>
            
@@ -39,18 +39,19 @@ export default function Sidebar() {
            <div className="flex items-center px-2 space-x-2 border-white rounded-xl hover:bg-slate-400 cursor-pointer">
            
            <User color="black"/>
-             <Link href="Customer"className="px-4 py-2  "> Customer</Link>
+             <Link href="/Customer"className="px-4 py-2  "> Customer</Link>
            </div>
             
            <div className="flex items px-2 space-x-2 border-white rounded-xl hover:bg-slate-400 cursor-pointer">
             {/* <Image src="" alt="Icon" height={20} width={20}  /> */}
             <Settings className="mt-1"/>
              <li className="px-4 py-2  " onClick={dropdown}> Settings{isDropDown &&(
-               <ul>
-                 <li className="px-4 py-2  border-white rounded-xl  hover:scale-125 cursor-pointer">Profile</li>
-                 <li className="px-4 py-2  border-white rounded-xl  hover:scale-125 cursor-pointer">Roles</li>
-                <li className="px-4 py-2  border-white rounded-xl  hover:scale-125 cursor-pointer">Users</li>
-              </ul>)}
+               <ul className="flex flex-col">
+                <Link href='profile' className="px-4 py-2  border-white rounded-xl  hover:scale-125 cursor-pointer">Profile</Link>
+                <Link href='role' className="px-4 py-2  border-white rounded-xl  hover:scale-125 cursor-pointer">Roles</Link>
+                <Link href='user' className="px-4 py-2  border-white rounded-xl  hover:scale-125 cursor-pointer">Users</Link>               
+              </ul>)
+              }
              </li>
            </div>
 
