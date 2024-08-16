@@ -5,7 +5,6 @@ import React, { useState } from 'react'
 const Axios = () => {
     const token= ""
     const [table, setTable] = useState([])
-    const getTable = async()  =>{
         try {
             const postTable = async ()=>{
                 const response = await axios.post("http://localhost:8000/customer",{

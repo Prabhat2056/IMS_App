@@ -14,12 +14,12 @@ const Header = () => {
         <h1 className="text-blue-600 text-2xl font-extrabold mt-1.5">IMS APP</h1>
       </div>
       <div className='flex justify-between items-start flex-row w-full'>
-        <div className="flex space-x-2 mb-4">
+        <div className="flex space-x-2 ml-5 mb-4">
           <CustomInput placeholder="Search" value={search}
              onChange= {(e:any)=>setSearch(e.target.value)}
              />
         </div>
-        <div className="flex space-x-2 cursor-pointer">
+        <div className="flex space-x-2 mr-5 mt-5 cursor-pointer">
           <span>Prabhat Bhattarai</span>
           <ChevronDownIcon />
         </div>

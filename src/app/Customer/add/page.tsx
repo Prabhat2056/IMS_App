@@ -1,6 +1,93 @@
 "use client"
 import CustomInput from '@/app/component/CustomInput'
+import axios from 'axios';
 import React, { useState } from 'react'
+
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsImZpcnN0X25hbWUiOiJwcmFiaW4iLCJtaWRkbGVfbmFtZSI6IiIsImxhc3RfbmFtZSI6ImJoYXR0YXJhaSIsImVtYWlsIjoicHJhYmluMTIzM0BnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRnSUNYeUVxUGV3azNyQng1eFV5YkMuQ1NnS2M0NE5WZjBEMXBYRzVHelY0N0xRdkpmR3RaMiIsInJvbGVfaWQiOjIsImNyZWF0ZWRfYXQiOiIyMDI0LTA3LTMxVDA2OjMxOjUxLjY0MloiLCJ1cGRhdGVkX2F0IjoiMjAyNC0wNy0zMVQwNjozMTo1MS42NDJaIiwiaWF0IjoxNzIyNDA3NTY3fQ.lW3BdpJgQYxj9GvCh095UMMtk6t-eR6uQ6-C_2in58s";
+  
+  const postTable = async () => {
+    try {
+      const response = await axios.post("http://localhost:8000/customer", 
+        {
+          name: "",
+          email: "",
+          phone: "",
+          street_address: "",
+          city: "",
+          province: "",
+          zip_code: "",
+          is_vendor: ""
+        },
+        {
+          headers: {
+            "Content-Type": "Application.json",
+            "Authorization": `Bearer ${token}`
+          }
+        }
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+
+  const getTable = async () => {
+    try {
+      const response = await axios.get("http://localhost:8000/customer", {
+        headers: {
+          "Content-Type": "Application.json",
+          "Authorization": `Bearer ${token}`,
+        },
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+
+  const updateCustomer= async()=>{
+    try{
+        const customerData={
+            first_name:"Saroj",
+            last_name:"Gelal",
+            email:"saroj@gmail.com",
+        };
+
+        const response= await axios({
+            url:"http://localhost:8000/customer",
+            method:"PATCH",
+            headers: {
+                "Content-Type":"application/json"
+            },
+            data: customerData
+    });
+        console.log("Customer updated successfully",response.data);
+        postTable();
+    }
+    catch(error){
+        console.error("Error updating customer",error);
+    }
+};
+
+
+  const deleteUser = async()=>{
+  try{
+      const response= await axios({
+          url:"http://localhost:8000/customer",
+          method:"DELETE",
+          headers: {
+              "Content-Type":"application/json"
+          },
+  });
+  
+      console.log("Customer deleted successfully",response.data);
+      postTable();
+  }
+  catch(error){
+      console.error("Error deleting customer",error);
+      
+  }
+}; 
 
 const add = () => {
   const [name, setName] = useState("")
