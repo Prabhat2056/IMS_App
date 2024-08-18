@@ -1,7 +1,7 @@
 "use client";
 import CustomInput from "@/app/component/CustomInput";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const token =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsImZpcnN0X25hbWUiOiJwcmFiaW4iLCJtaWRkbGVfbmFtZSI6IiIsImxhc3RfbmFtZSI6ImJoYXR0YXJhaSIsImVtYWlsIjoicHJhYmluMTIzM0BnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRnSUNYeUVxUGV3azNyQng1eFV5YkMuQ1NnS2M0NE5WZjBEMXBYRzVHelY0N0xRdkpmR3RaMiIsInJvbGVfaWQiOjIsImNyZWF0ZWRfYXQiOiIyMDI0LTA3LTMxVDA2OjMxOjUxLjY0MloiLCJ1cGRhdGVkX2F0IjoiMjAyNC0wNy0zMVQwNjozMTo1MS42NDJaIiwiaWF0IjoxNzIyNDA3NTY3fQ.lW3BdpJgQYxj9GvCh095UMMtk6t-eR6uQ6-C_2in58s";
@@ -96,7 +96,7 @@ const addOrUpdate = async (id?: string) => {
 //   }
 // };
 
-const deleteUser = async () => {
+const deleteCustomer = async () => {
   try {
     const response = await axios({
       url: "http://localhost:8000/customer",
@@ -121,6 +121,16 @@ const add = () => {
   const [city, setCity] = useState("");
   const [province, setProvince] = useState("");
   const [zipCode, setZipCode] = useState("");
+
+  useEffect(() => {
+  getTable();
+  }, [])
+
+  useEffect(() => {
+   deleteCustomer();
+  }, [])
+  
+  
 
   return (
     <div className="flex flex-col justify-center items-center bg-zinc-100 w-4/5 fixed border">
@@ -189,7 +199,7 @@ const add = () => {
         <button
           onClick={(e) => {
             e.preventDefault();
-            addOrUpdate(id)
+            addOrUpdate()//  (id)
           }}
           className="border rounded-sm w-20 ml-32 bg-blue-400"
         >
