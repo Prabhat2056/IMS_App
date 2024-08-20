@@ -121,6 +121,11 @@ const add = () => {
   const [city, setCity] = useState("");
   const [province, setProvince] = useState("");
   const [zipCode, setZipCode] = useState("");
+  const [isVendor, setIsVendor] = useState(Boolean)
+
+
+
+
 
   useEffect(() => {
   getTable();
@@ -160,28 +165,28 @@ const add = () => {
           label="Street Address"
           placeholder="Enter Street Address"
           value={streetAddress}
-          onChange={(e: any) => setName(e.target.value)}
+          onChange={(e: any) => setStreetAdress(e.target.value)}
         />
 
         <CustomInput
           label="City"
           placeholder="Enter City"
           value={city}
-          onChange={(e: any) => setName(e.target.value)}
+          onChange={(e: any) => setCity(e.target.value)}
         />
 
         <CustomInput
           label="Province"
           placeholder="Enter Province Name"
           value={province}
-          onChange={(e: any) => setName(e.target.value)}
+          onChange={(e: any) => setProvince(e.target.value)}
         />
 
         <CustomInput
           label="Zip Code"
           placeholder="Enter Zipcode"
           value={zipCode}
-          onChange={(e: any) => setName(e.target.value)}
+          onChange={(e: any) => setZipCode(e.target.value)}
         />
 
         <label>
@@ -190,7 +195,8 @@ const add = () => {
             type="checkbox"
             id="vendor1"
             name="vendor1"
-            value="vendor"
+            checked={isVendor}
+            onChange={(e)=>{setIsVendor(e.target.checked)}}
           />
           IsVendor
         </label>

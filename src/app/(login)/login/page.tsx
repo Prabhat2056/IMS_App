@@ -25,6 +25,7 @@ const login = () => {
         Cookies.set("token",token);
         
       } catch (error) {
+        console.error(error)
         
       }
     }
@@ -58,8 +59,8 @@ const login = () => {
 
         <button
           onClick={(e) => {
-            e.preventDefault(); 
-             
+            e.preventDefault() 
+            handleSubmit
           }}
           className="border rounded-sm w-20 ml-32 bg-blue-400"
         >
