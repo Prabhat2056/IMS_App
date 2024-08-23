@@ -7,7 +7,7 @@ const CustomInput = (props:any) => {
     <div>
         <label>{props.label}</label>
         <br></br>
-            <input className="border rounded-lg pl-3 bg-slate-100 " 
+            <input className="border rounded-lg pl-3 w-80 bg-slate-100 " 
             type="text" 
             placeholder={props.placeholder}
             value={props.value}

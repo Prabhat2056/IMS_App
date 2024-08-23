@@ -1,47 +1,12 @@
 "use client";
-import CustomInput from "@/app/component/CustomInput";
+import CustomInput from "@/component/CustomInput";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { boolean, number, object, string } from "yup";
 
 const token =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsImZpcnN0X25hbWUiOiJwcmFiaW4iLCJtaWRkbGVfbmFtZSI6IiIsImxhc3RfbmFtZSI6ImJoYXR0YXJhaSIsImVtYWlsIjoicHJhYmluMTIzM0BnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRnSUNYeUVxUGV3azNyQng1eFV5YkMuQ1NnS2M0NE5WZjBEMXBYRzVHelY0N0xRdkpmR3RaMiIsInJvbGVfaWQiOjIsImNyZWF0ZWRfYXQiOiIyMDI0LTA3LTMxVDA2OjMxOjUxLjY0MloiLCJ1cGRhdGVkX2F0IjoiMjAyNC0wNy0zMVQwNjozMTo1MS42NDJaIiwiaWF0IjoxNzIyNDA3NTY3fQ.lW3BdpJgQYxj9GvCh095UMMtk6t-eR6uQ6-C_2in58s";
 
-const postTable = async () => {
-  try {
-    const response = await axios("http://localhost:8000/customer", {
-      headers: {
-        "Content-Type": "Application.json",
-        Authorization: `Bearer ${token}`,
-      },
-      method: "POST",
-      data: {
-        name: "",
-        email: "",
-        phone: "",
-        street_address: "",
-        city: "",
-        province: "",
-        zip_code: "",
-        is_vendor: "",
-      },
-    });
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-const getTable = async () => {
-  try {
-    const response = await axios.get("http://localhost:8000/customer", {
-      headers: {
-        "Content-Type": "Application.json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
-  } catch (error) {
-    console.error(error);
-  }
-};
 
 const addOrUpdate = async (id?: string) => {
   // e.preventDefault();
@@ -73,78 +38,69 @@ const addOrUpdate = async (id?: string) => {
   }
 };
 
-// const updateCustomer = async () => {
-//   try {
-//     const customerData = {
-//       first_name: "Saroj",
-//       last_name: "Gelal",
-//       email: "saroj@gmail.com",
-//     };
-
-//     const response = await axios({
-//       url: "http://localhost:8000/customer",
-//       method: "PATCH",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       data: customerData,
-//     });
-//     console.log("Customer updated successfully", response.data);
-//     postTable();
-//   } catch (error) {
-//     console.error("Error updating customer", error);
-//   }
-// };
-
-const deleteCustomer = async () => {
-  try {
-    const response = await axios({
-      url: "http://localhost:8000/customer",
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    console.log("Customer deleted successfully", response.data);
-    postTable();
-  } catch (error) {
-    console.error("Error deleting customer", error);
-  }
-};
 
 const add = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [phonenumber, setPhoneNumber] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [streetAddress, setStreetAdress] = useState("");
   const [city, setCity] = useState("");
   const [province, setProvince] = useState("");
   const [zipCode, setZipCode] = useState("");
   const [isVendor, setIsVendor] = useState(Boolean)
 
+  let customerSchema =object({
+    name: string().required("Name is required"),
+    email: string().required("Email is required"),
+    phoneNumber: string().email().required(),
+    streetAddress: string(),
+    city: string(),
+    province: string(),
+    zipCode: number().nullable(),
+    isVendor: boolean().required(),
+  });
 
+  const formFields= {
+    name,
+    email,
+    phoneNumber,
+    streetAddress,
+    city,
+    province,
+    zipCode,
+    isVendor: false,
+  }
 
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    try {
+      await customerSchema.validate(formFields);
+      fetch("url", {
+        method: "POST",
+        body: JSON.stringify(formFields)
+      })
+    } catch (e: any) {
+      console.log(e.errors);
+    }
+  };
 
-
-  useEffect(() => {
-  getTable();
-  }, [])
-
-  useEffect(() => {
-   deleteCustomer();
-  }, [])
   
   
 
   return (
     <div className="flex flex-col justify-center items-center bg-zinc-100 w-4/5 fixed border">
-      <form className="flex flex-col gap-3 w-1/3 my-5 p-5 rounded-xl bg-white border">
+      <form 
+      action= "html"
+      className="flex flex-col gap-2 w-1/3 my-5 p-4 rounded-xl bg-white border"
+      onSubmit={handleSubmit}
+      >
         <CustomInput
           label="Name"
           placeholder="Enter Name"
           value={name}
-          onChange={(e: any) => setName(e.target.value)}
+          onChange={(e: any) => setName(e.target.value)
+            
+          }
         />
 
         <CustomInput
@@ -157,7 +113,7 @@ const add = () => {
         <CustomInput
           label="Phone Number"
           placeholder="Enter Phone Number"
-          value={phonenumber}
+          value={phoneNumber}
           onChange={(e: any) => setPhoneNumber(e.target.value)}
         />
 

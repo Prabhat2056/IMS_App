@@ -1,7 +1,7 @@
 "use client"
 import router from 'next/router';
 import React, { useState } from 'react'
-import CustomInput from '../../component/CustomInput';
+import CustomInput from '../../../component/CustomInput';
 
 const Role = () => {
   const [role, setRole] = useState("")

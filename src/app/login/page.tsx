@@ -30,13 +30,17 @@ const login = () => {
         
       } catch (error) {
         console.error(error)
+        // alert(e)
         
       }
     }
+
+   
   return (
-    <div className="flex flex-col justify-center items-center bg-zinc-100">
-      <form onSubmit={handleSubmit} className="flex flex-col gap-3 w-1/3 my-5 p-2 rounded-xl bg-white border">
+  
+      <form onSubmit={handleSubmit} className=" flex flex-col size-full h-[300px] w-[400px] rounded-2xl border-double border-4 items-center gap-4 p-10">
         <CustomInput 
+       
           label="Email"
           placeholder="Enter Email"
           value={email}
@@ -52,7 +56,7 @@ const login = () => {
 
         <label>
           <input
-            className="mr-3"
+            className="mr-3 mt-3"
             type="checkbox"
             id="vendor1"
             name="vendor1"
@@ -63,13 +67,13 @@ const login = () => {
 
         <button
           type='submit'
-          className="border rounded-sm w-20 ml-32 bg-blue-400"
+          className=" rounded w-28 h-10 mt-5 bg-blue-400 "
         >
           Login
         </button>
         
   </form>
-  </div>
+
   )
 }
 
