@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from 'react'
-import CustomInput from '../../component/CustomInput'
+import CustomInput from '@/component/CustomInput'
 import Cookies from "js-cookie";
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
@@ -37,8 +37,8 @@ const login = () => {
 
    
   return (
-  
-      <form onSubmit={handleSubmit} className=" flex flex-col size-full h-[300px] w-[400px] rounded-2xl border-double border-4 items-center gap-4 p-10">
+    <div className="flex justify-center items-center h-screen">
+      <form onSubmit={handleSubmit} className=" flex flex-col  size-full h-[300px] w-[400px] rounded-2xl border-double border-4 items-center gap-4 p-10">
         <CustomInput 
        
           label="Email"
@@ -74,6 +74,8 @@ const login = () => {
         
   </form>
 
+    </div>
+      
   )
 }
 

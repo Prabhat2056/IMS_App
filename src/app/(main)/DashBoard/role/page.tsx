@@ -1,7 +1,7 @@
 "use client"
 import router from 'next/router';
 import React, { useState } from 'react'
-import CustomInput from '../../../component/CustomInput';
+import CustomInput from '../../../../component/CustomInput';
 
 const Role = () => {
   const [role, setRole] = useState("")
@@ -18,7 +18,7 @@ const Role = () => {
           value={role}
           onChange={(e: any) => setRole(e.target.value)}
         />
-      <button className='border rounded-lg justify-center  bg-green-400 w-20 h-7 mt-6'
+      <button className='border rounded-lg justify-center  bg-green-400 w-24 h-7 mt-6'
       onClick={(e)=>{
         e.preventDefault();
         router.push("/Customer/add")
